@@ -4,6 +4,17 @@ A structured, obligation-by-obligation comparison of India's Digital Personal Da
 
 **This is a reference framework for compliance practitioners. It is not legal advice, is not a substitute for qualified counsel, and should not be relied on as a complete or current statement of law for any specific organisation's circumstances.** See [Scope & Disclaimer](#scope--disclaimer).
 
+## Key findings
+
+Ready answers to "which DPDP obligation has no GDPR equivalent, and why" (a fair, checkable interview question — see the row for the full reasoning and citations, not just the label):
+
+1. **Consent Manager (Row C6)** — a Board-registered, financial-grade, for-profit consent-brokering intermediary (min. ₹2 crore net worth, independently certified). No comparable statutory institution exists in GDPR or CCPA.
+2. **Significant Data Fiduciary designation (Row SDF1)** — a *discretionary government notification* event, not a self-assessed threshold the way GDPR's Art 37 DPO trigger or CCPA's Article 9 audit threshold are. An organisation can clear both comparators' "high-risk processor" bars and still never become a DPDP SDF, or vice versa.
+3. **Nomination on death/incapacity (Row R6)** — GDPR explicitly excludes deceased persons from scope by recital; CCPA's "consumer" definition is limited to living persons. DPDP builds succession into the rights chapter directly.
+4. **Mandatory 12-month free credit monitoring (Row BN3)** — Cal. Civ. Code §1798.82(d)(2)(G)'s affirmative remedial-service requirement for SSN-type breaches the business itself caused. Neither DPDP nor GDPR imposes anything comparable — both are notify-and-inform regimes only.
+
+And the counterintuitive finding most likely to surprise someone who assumes "DPDP = GDPR, but stricter" across the board: **DPDP's Rule 14(3) response-timeline ceiling (90 days, once in force) is the *least* protective of the three regimes** — roughly 3x GDPR's ~30 days and 2x CCPA's 45 days (Row R7). DPDP is stricter on breach notification and children's-data age thresholds, but *looser* on individual-rights response speed and, as currently drafted, on cross-border transfer mechanics (Row CB1) — the picture is genuinely mixed, not uniformly stricter.
+
 ## What's in this repo
 
 ```
@@ -73,16 +84,11 @@ A sample of that column was stress-tested with an explicit devil's-advocate pass
 - **Row CB1** — tested whether DPDP's §16(2) savings clause (which preserves stricter sectoral Indian law, e.g. financial-sector localisation rules) undermines the "DPDP's cross-border regime is the simpler build" finding. It doesn't — the finding is specifically scoped to what §16 itself requires, and says so.
 - **Row SDF3** — tested whether GDPR Art 58(1)(b) (a supervisory authority's power to conduct an audit) undercuts the claim that GDPR has no independent-audit mandate comparable to DPDP/CCPA. It doesn't — Art 58(1)(b) is regulator-initiated, not a routine controller-self-triggered duty.
 
-## Key findings
+**Scope of the adversarial pass.** The devil's-advocate review covered the rows where the conclusion was most counterintuitive or carried the highest error cost — cross-border transfer (CB1), the Significant Data Fiduciary audit comparison (SDF3), and breach notification (BN1/BN2), which was revised as a result. Rows in categories where the three regimes align closely — notice, purpose limitation, data minimisation — were verified against primary sources but did not receive a separate adversarial pass, on the basis that the error cost there is lower and the mappings less contestable.
 
-Ready answers to "which DPDP obligation has no GDPR equivalent, and why" (a fair, checkable interview question — see the row for the full reasoning and citations, not just the label):
+### 5. Citation verification
 
-1. **Consent Manager (Row C6)** — a Board-registered, financial-grade, for-profit consent-brokering intermediary (min. ₹2 crore net worth, independently certified). No comparable statutory institution exists in GDPR or CCPA.
-2. **Significant Data Fiduciary designation (Row SDF1)** — a *discretionary government notification* event, not a self-assessed threshold the way GDPR's Art 37 DPO trigger or CCPA's Article 9 audit threshold are. An organisation can clear both comparators' "high-risk processor" bars and still never become a DPDP SDF, or vice versa.
-3. **Nomination on death/incapacity (Row R6)** — GDPR explicitly excludes deceased persons from scope by recital; CCPA's "consumer" definition is limited to living persons. DPDP builds succession into the rights chapter directly.
-4. **Mandatory 12-month free credit monitoring (Row BN3)** — Cal. Civ. Code §1798.82(d)(2)(G)'s affirmative remedial-service requirement for SSN-type breaches the business itself caused. Neither DPDP nor GDPR imposes anything comparable — both are notify-and-inform regimes only.
-
-And the counterintuitive finding most likely to surprise someone who assumes "DPDP = GDPR, but stricter" across the board: **DPDP's Rule 14(3) response-timeline ceiling (90 days, once in force) is the *least* protective of the three regimes** — roughly 3x GDPR's ~30 days and 2x CCPA's 45 days (Row R7). DPDP is stricter on breach notification and children's-data age thresholds, but *looser* on individual-rights response speed and, as currently drafted, on cross-border transfer mechanics (Row CB1) — the picture is genuinely mixed, not uniformly stricter.
+Every citation in this matrix — not just the rows above — was independently checked against primary-source text after the initial build: 176 section/article/rule references, 49 numeric claims, and 99 date and version references. Four citation errors were found and corrected before publication. Method, sources, full results, and the audit's own limitations are documented in [AUDIT_LOG.md](AUDIT_LOG.md).
 
 ## Templates
 
