@@ -38,7 +38,7 @@ Per Gazette Notification G.S.R. 843(E) (13 Nov 2025), **DPDP Act Sections 11–1
 
 1. Requester's full name
 2. Contact details (email/phone) for correspondence about this request
-3. Relationship to the data (the requester themself / a parent-or-guardian for a child / a nominee under DPDP §14 / an authorised agent under CCPA §1798.140(j))
+3. Relationship to the data (the requester themself / a parent-or-guardian for a child / a nominee under DPDP §14 / an authorised agent under CCPA Regulations §7001(d)/§7063)
 4. Jurisdiction / residency (drives which regime applies — see Step 2)
 5. Request type (access / correction / erasure / grievance / portability / opt-out-of-sale — select one or more)
 6. Description of the specific data or processing activity the request concerns, if known
@@ -50,7 +50,7 @@ Per Gazette Notification G.S.R. 843(E) (13 Nov 2025), **DPDP Act Sections 11–1
 
 Verification standard must be **proportionate to the sensitivity of the request** — a bare access request needs lighter verification than an erasure request affecting financial or health-adjacent records. `[ORG-SPECIFIC: define your organisation's tiered verification matrix here]`. Do not over-collect: requesting a government ID for a low-sensitivity access request is itself a data-minimisation problem (compliance matrix Row M1/M2).
 
-For a DPDP nomination (Row R6) or a CCPA authorised-agent request (§1798.140(j)), verify the AGENT/NOMINEE'S authority documentation separately from the underlying data subject's identity.
+For a DPDP nomination (Row R6) or a CCPA authorised-agent request (CCPA Regulations §7001(d)/§7063), verify the AGENT/NOMINEE'S authority documentation separately from the underlying data subject's identity.
 
 ## 4. Triage & Routing
 
