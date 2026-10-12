@@ -23,6 +23,7 @@ COLUMNS = [
     "CCPA/CPRA Equivalent (Civil Code §)",
     "Mapping Verdict vs GDPR",
     "Mapping Verdict vs CCPA/CPRA",
+    "Verdict Qualified",
     "Compliance Mechanism",
     "Gap / Conflict Analysis",
     "Common Implementation Pitfall",
@@ -605,7 +606,7 @@ add("SDF3", CAT, "Verified against primary source",
     "No equivalent",
     "Direct equivalent",
     "Build the SDF independent-audit function against CCPA's Article 9 cybersecurity-audit architecture as the closest available real-world template (auditor independence safeguards, defined scope, management-reporting line, documentation retention) rather than against GDPR's Art 35 DPIA process, which is self-assessment only and the wrong structural model for what S.10(2)(b) actually requires.",
-    "A genuinely counterintuitive and high-value finding for Attack 1/Attack 2: on the specific 'mandatory independent third-party audit of the data-protection programme' concept, DPDP's closest true structural peer among the three regimes is CCPA's Article 9 Cybersecurity Audit regime, NOT anything in GDPR -- inverting the default assumption that GDPR is always the nearer comparator. Both DPDP S.10(2)(b) and CCPA Article 9 share: a mandatory (not voluntary) independent-auditor requirement, a defined periodic cadence, and a report/certification channel to the relevant regulator (India's Board; California's CPPA). GDPR's Art 35 DPIA, by contrast, is textually and functionally a SELF-assessment the controller conducts itself (with only optional DPO/supervisory-authority consultation), never an independent third party's audit product -- a materially different governance model despite being the instinctively 'obvious' GDPR comparator for a Big-Four-style audit requirement. ADVERSARIAL CHECK: the strongest counter-argument is that GDPR DOES have an independent-audit concept the row ignores -- Article 58(1)(b) empowers a supervisory authority to 'carry out investigations in the form of a data protection audit.' Re-checked against the Art 51-76 text read this session: this does not defeat the finding, it sharpens it -- Art 58(1)(b) is a REGULATOR-INITIATED investigative power (triggered by the authority's own risk assessment, a complaint, or a breach), not a routine, periodic, controller-self-triggered mandatory obligation the way DPDP S.10(2)(b)/Rule 13 and CCPA Article 9 both are. No GDPR provision requires a controller to proactively commission and fund an independent audit of itself on a fixed cadence absent a specific supervisory-authority trigger -- the DPDP/CCPA structural parallel holds.",
+    "A genuinely counterintuitive and high-value finding for Attack 1/Attack 2: on the specific 'mandatory independent third-party audit of the data-protection programme' concept, DPDP's closest true structural peer among the three regimes is CCPA's Article 9 Cybersecurity Audit regime, NOT anything in GDPR -- inverting the default assumption that GDPR is always the nearer comparator. Both DPDP S.10(2)(b) and CCPA Article 9 share: a mandatory (not voluntary) independent-auditor requirement, a defined periodic cadence, and a report/certification channel to the relevant regulator (India's Board; California's CPPA). GDPR's Art 35 DPIA, by contrast, is textually and functionally a SELF-assessment the controller conducts itself (with only optional DPO/supervisory-authority consultation), never an independent third party's audit product -- a materially different governance model despite being the instinctively 'obvious' GDPR comparator for a Big-Four-style audit requirement. ADVERSARIAL CHECK: the strongest counter-argument is that GDPR DOES have an independent-audit concept the row ignores -- Article 58(1)(b) empowers a supervisory authority to 'carry out investigations in the form of a data protection audit.' Re-checked against the Art 51-76 text in full: this does not defeat the finding, it sharpens it -- Art 58(1)(b) is a REGULATOR-INITIATED investigative power (triggered by the authority's own risk assessment, a complaint, or a breach), not a routine, periodic, controller-self-triggered mandatory obligation the way DPDP S.10(2)(b)/Rule 13 and CCPA Article 9 both are. No GDPR provision requires a controller to proactively commission and fund an independent audit of itself on a fixed cadence absent a specific supervisory-authority trigger -- the DPDP/CCPA structural parallel holds.",
     "Mapping DPDP's SDF independent-audit requirement to GDPR's Article 35 DPIA as the 'obvious' comparator without checking whether Article 35 actually requires INDEPENDENCE from the controller -- it does not; treating a self-conducted DPIA as satisfying S.10(2)(b)'s 'independent data auditor' requirement would misread both the DPDP text (which specifically requires an independent auditor, not a self-assessment) and the GDPR text (which specifically does not require one).")
 
 # ============================================================
@@ -700,9 +701,9 @@ add("AC2", CAT, "Verified against primary source",
 # programme must build toward), because that is the only version worth
 # building to -- but every row states plainly whether the cited provision
 # is live today, and the README states this Tranche-3 date as the single
-# most important caveat in the whole project. See SESSION_2_NOTES.md for
-# the verification trail (three independent sources cross-checked against
-# the notification text itself).
+# most important caveat in the whole project. The verification trail for
+# these dates (three independent sources cross-checked against the
+# commencement notification text itself) is in AUDIT_LOG.md.
 import re
 
 ACT_TRANCHE_1 = set([1, 2, 18, 19, 20, 21, 22, 23, 24, 25, 26, 35, 38, 39, 40, 41, 42, 43])
@@ -773,6 +774,27 @@ for r in rows:
 # ============================================================
 # Build DataFrame, write CSV + XLSX
 # ============================================================
+# "Mapping Verdict vs ..." is a controlled vocabulary: Direct equivalent /
+# Partial overlap / Stricter under DPDP / No equivalent. Two rows need the
+# label read as flagged rather than literal, and an earlier draft encoded
+# that by appending "[see note]" INSIDE the verdict cell. That silently broke
+# the vocabulary -- a pivot or GROUP BY on the column returned six distinct
+# verdicts instead of four, splitting one category in two. The qualifier now
+# lives in its own column, so the verdict column stays countable and the
+# caveat stays visible. The explanation itself is in Gap / Conflict Analysis.
+_VERDICT_COLS = ("Mapping Verdict vs GDPR", "Mapping Verdict vs CCPA/CPRA")
+_QUALIFIER = " [see note]"
+
+for r in rows:
+    qualified = any(_QUALIFIER in r[COLUMNS.index(c)] for c in _VERDICT_COLS)
+    for c in _VERDICT_COLS:
+        i = COLUMNS.index(c)
+        r[i] = r[i].replace(_QUALIFIER, "")
+    r.insert(
+        COLUMNS.index("Verdict Qualified"),
+        "Yes - see Gap / Conflict Analysis" if qualified else "No",
+    )
+
 df = pd.DataFrame(rows, columns=COLUMNS)
 
 csv_path = "../matrix/compliance_matrix.csv"
@@ -788,7 +810,7 @@ with pd.ExcelWriter(xlsx_path, engine="openpyxl") as writer:
 
     widths = {
         "A": 10, "B": 28, "C": 20, "D": 30, "E": 38, "F": 55, "G": 22, "H": 55,
-        "I": 40, "J": 16, "K": 16, "L": 45, "M": 65, "N": 55,
+        "I": 40, "J": 16, "K": 16, "L": 18, "M": 45, "N": 65, "O": 55,
     }
     for col, w in widths.items():
         ws.column_dimensions[col].width = w
